@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/kn7072/go_algorihtms/sort"
+	"github.com/kn7072/go_algorihtms/structure/queue"
 )
 
 func main() {
@@ -13,6 +14,9 @@ func main() {
 	
 	y := sort.Quicksort(x) // sort.Quicksort[int](x)
 	fmt.Println(y)
+
+	q := queue.Queue{}
+	fmt.Println(q)
 	//y := sort.
 	//y(x)
 }
