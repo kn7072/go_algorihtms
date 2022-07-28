@@ -52,3 +52,8 @@ func (g *Graph) AddWeightedEdge(one, two, weight int) {
 		g.edges[two][one] = weight
 	}
 }
+
+// getter edges
+func (g *Graph) GetEdges() map[int]map[int]int {
+	return g.edges
+}
