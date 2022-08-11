@@ -4,6 +4,38 @@ import (
 	"fmt"
 )
 
+/*
+https://stackoverflow.com/questions/65440847/invalid-receiver-for-pointer-alias-type
+https://go.dev/ref/spec#Method_declarations
+
+The receiver is specified via an extra parameter section preceding the method name. 
+That parameter section must declare a single non-variadic parameter, the receiver. 
+Its type must be a defined type T or a pointer to a defined type T. 
+T is called the receiver base type. 
+A receiver base type cannot be a pointer or interface type and it must be defined in the same package as the method.
+
+
+type A struct { 
+	value int
+}
+type B *A
+
+func (b B)Print() { // приемник тип указатель
+	fmt.Printf("Value: %d\n", b.value)
+}
+
+
+
+// интерфейс для тестирования ресивера с типом интерфейс
+type MyInterface interface {
+	Method()
+}
+
+func (i MyInterface) Method() { // приемник интерфейс - не законно
+	fmt.Println(i)
+}
+*/
+
 type MyStuct struct {
 	Value int
 }

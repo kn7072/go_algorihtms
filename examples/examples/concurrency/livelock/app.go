@@ -50,7 +50,7 @@ func (d *diner) eatWith(sp *spoon, spouse *diner) {
 		name:     "Bob",
 		isHungry: true,
 	}
-	wifi := &diner{
+	wife := &diner{
 		name:     "Alice",
 		isHungry: true,
 	}
@@ -61,12 +61,12 @@ func (d *diner) eatWith(sp *spoon, spouse *diner) {
 	wg.Add(2)
 
 	go func() {
-		husband.eatWith(sp, wifi)
+		husband.eatWith(sp, wife)
 		wg.Done()
 	}()
 
 	go func() {
-		wifi.eatWith(sp, husband)
+		wife.eatWith(sp, husband)
 		wg.Done()
 	}()
 
