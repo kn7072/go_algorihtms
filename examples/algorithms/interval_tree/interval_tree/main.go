@@ -43,5 +43,12 @@ func main(){
 	r = overlap(root, NewValue(10, 10))
 	fmt.Println(r)
 
+	r = overlap(root, NewValue(5, 6))
+	fmt.Println(r)
+
+	// Delete(&root, NewValue(5, 6))
+	// Delete(&root, NewValue(12, 13))
+	Delete(&root, NewValue(15, 16))
+
 	fmt.Println()
 }

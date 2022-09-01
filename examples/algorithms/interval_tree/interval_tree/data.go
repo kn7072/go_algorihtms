@@ -50,10 +50,10 @@ func overlap(root *Node, key *Value) bool {
 	res := false
 	if root.Left != nil {
 		if key.Left <= root.Left.Key.Max {
-			res = overlap(root.Left, key)
+			return overlap(root.Left, key)
 		}
 	}
-	if !res && root.Right != nil {
+	if root.Right != nil {
 		if key.Left <= root.Right.Key.Max {
 			res = overlap(root.Right, key)
 		}
@@ -154,7 +154,9 @@ func Delete(root **Node, key *Value) {
 		} else {
 			minVal := min((*root).Right)
 			(*root).Key = minVal
-			Delete(root, &minVal)
+			//Delete(root, &minVal)
+			Delete(&(*root).Right, &minVal)
+			hook(*root)
 		}
 		return
 	case -1:
@@ -165,6 +167,8 @@ func Delete(root **Node, key *Value) {
 
 	// update height
 	(*root).Height = height(*root)
+	// update max of interval
+	hook(*root)
 
 	bFactor := balanceFactor(*root)
 
