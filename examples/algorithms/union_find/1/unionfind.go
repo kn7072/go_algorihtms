@@ -1,5 +1,9 @@
 package main
 
+// go get github.com/korzhnev/unionfind
+// https://pkg.go.dev/github.com/korzhnev/unionfind#section-readme
+
+// пример взят
 // https://github.com/theodesp/unionfind/blob/master/unionfind.go
 
 type UnionFind struct {
