@@ -46,13 +46,21 @@ func main() {
 	// isRoot := zig(findNode)
 	// fmt.Println(isRoot)
 
-	findNode = find(&root, 50)
+	// findNode = find(&root, 50)
+	// isRoot := zig(findNode)
+	// fmt.Println(isRoot)
+
+	// findNode = find(&root, 45)
+	// isRoot := zig(findNode)
+	// fmt.Println(isRoot)
+
+	// findNode = find(&root, 200)
+	// isRoot := zig(findNode)
+	// fmt.Println(isRoot)
+
+	findNode = find(&root, 25)
 	isRoot := zig(findNode)
 	fmt.Println(isRoot)
-
-	// findNode = find(&root, 50)
-	// isRoot = zig(findNode)
-	// fmt.Println(isRoot)
 
 	// findNode = find(&root, 200)
 	// isRoot = zig(findNode)

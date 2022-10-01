@@ -83,9 +83,10 @@ func zig[T Ordered](node *Node[T]) (isRoot bool){
 		} else {
 			parentValue.Left = node.Right
 			parentValue.Left.Parent = &parentValue
-			node.Right = &parentValue
-			parentValue.Parent = node
 		}
+
+		node.Right = &parentValue
+		parentValue.Parent = node
 		
 		if parentValue.Right != nil {
 			parentValue.Right.Parent = &parentValue
@@ -103,9 +104,47 @@ func zig[T Ordered](node *Node[T]) (isRoot bool){
 			// parent is root
 			*(node.Parent) = *node
 			node.Parent.Parent = nil
+			isRoot = true
 		}
 
 	case "right":
+		// if node.Left == nil {
+		// 	parentValue.Right = node.Left
+		// } else {
+		// 	parentValue.Right = node.Left
+		// 	parentValue.Right.Parent = &parentValue
+		// 	node.Left = &parentValue
+		// 	parentValue.Parent = node
+		// }
+
+		if node.Left == nil {
+			parentValue.Right = node.Left
+		} else {
+			parentValue.Right = node.Left
+			parentValue.Right.Parent = &parentValue
+		}
+
+		node.Left = &parentValue
+		parentValue.Parent = node
+		
+		if parentValue.Left != nil {
+			parentValue.Left.Parent = &parentValue
+		}
+		switch posiotionNode(node.Parent){
+		case "left":
+			// parent is left child of grandparent
+			node.Parent.Parent.Left = node
+			node.Parent = node.Parent.Parent
+		case "right":
+			// parent is right child of grandparent
+			node.Parent.Parent.Right = node
+			node.Parent = node.Parent.Parent
+		case "root":
+			// parent is root
+			*(node.Parent) = *node
+			node.Parent.Parent = nil
+			isRoot = true
+		}
 	case "root":
 		return true
 	}
