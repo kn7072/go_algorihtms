@@ -101,7 +101,8 @@ func zig[T Ordered](node *Node[T]) (isRoot bool){
 			node.Parent = node.Parent.Parent
 		case "root":
 			// parent is root
-			node.Parent = nil
+			*(node.Parent) = *node
+			node.Parent.Parent = nil
 		}
 
 	case "right":

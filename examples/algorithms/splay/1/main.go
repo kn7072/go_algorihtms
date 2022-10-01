@@ -14,6 +14,10 @@ func main() {
 	node6 := &Node[int]{Value: 40}
 	node7 := &Node[int]{Value: 15}
 	node8 := &Node[int]{Value: 25}
+	node9 := &Node[int]{Value: 39}
+	node10 := &Node[int]{Value: 45}
+	node11 := &Node[int]{Value: 43}
+	node12 := &Node[int]{Value: 46}
 
 	insert[int](&root, &node1)
 	insert[int](&root, &node2)
@@ -23,6 +27,10 @@ func main() {
 	insert[int](&root, &node6)
 	insert[int](&root, &node7)
 	insert[int](&root, &node8)
+	insert[int](&root, &node9)
+	insert[int](&root, &node10)
+	insert[int](&root, &node11)
+	insert[int](&root, &node12)
 
 	// test find
 	findNode := find(&root, 50)
@@ -34,7 +42,11 @@ func main() {
 	// findNode = find(&root, 2)
 	// zig(findNode)
 
-	findNode = find(&root, 20)
+	// findNode = find(&root, 20)
+	// isRoot := zig(findNode)
+	// fmt.Println(isRoot)
+
+	findNode = find(&root, 50)
 	isRoot := zig(findNode)
 	fmt.Println(isRoot)
 
