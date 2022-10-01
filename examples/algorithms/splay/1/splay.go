@@ -58,23 +58,106 @@ func find[T Ordered](root **Node[T], value T) *Node[T] {
 	return nil
 }
 
-func zig[T Ordered](node *Node[T]) {
-	parentLink := node.Parent
+func posiotionNode[T Ordered](node *Node[T]) string {
+	if node.Parent == nil {
+		return "root"
+	} else if (node.Parent.Left != nil && node.Parent.Left == node) {
+		return "left"
+	} else {
+		return "right"
+	}
+}
+
+
+
+func zig[T Ordered](node *Node[T]) (isRoot bool){
 	
+
+	// parentPtr := node.Parent
+	parentValue := *node.Parent
+
+	switch posiotionNode(node){
+	case "left":
+		if node.Right == nil {
+			parentValue.Left = node.Right
+		} else {
+			parentValue.Left = node.Right
+			parentValue.Left.Parent = &parentValue
+			node.Right = &parentValue
+			parentValue.Parent = node
+		}
+		
+		if parentValue.Right != nil {
+			parentValue.Right.Parent = &parentValue
+		}
+		switch posiotionNode(node.Parent){
+		case "left":
+			// parent is left child of grandparent
+			node.Parent.Parent.Left = node
+			node.Parent = node.Parent.Parent
+		case "right":
+			// parent is right child of grandparent
+			node.Parent.Parent.Right = node
+			node.Parent = node.Parent.Parent
+		case "root":
+			// parent is root
+			node.Parent = nil
+		}
+
+	case "right":
+	case "root":
+		return true
+	}
+
+	return isRoot
+}
+
+func zigOLD[T Ordered](node *Node[T]) (isRoot bool) {
+	parentLink := node.Parent
 	parentValue := *parentLink
-	parentValue.Left = node.Right
-	node.Right = &parentValue
+	
+	if parentLink.Parent == nil {
+		return true
+	}
+	
+	if parentLink.Left != nil && parentLink.Left == node {
+		parentValue.Left = node.Right
+
+		
+		if node.Right != nil {
+			node.Right.Parent = &parentValue
+			*(node.Right) = parentValue
+		} else {
+			node.Right = &parentValue
+		}
+	} else if (parentLink.Right != nil && parentLink.Right == node) {
+		parentValue.Right = node.Left
+		
+		if node.Left != nil {
+			node.Left.Parent = &parentValue
+			*(node.Left) = parentValue
+		} else {
+			node.Left = &parentValue
+		}
+	}
+
 	parentValue.Parent = node
 
 	if parentLink.Parent == nil {
 		node.Parent = nil // is root
+		isRoot = true
 	} else {
 		node.Parent = parentLink.Parent
 	}
 	
 	*parentLink = *node
+
+	return isRoot
 }
 
-func splay[T Ordered](node **Node[T]) {
-
+func splay[T Ordered](node *Node[T]) {
+	isRoot := false
+	for !isRoot {
+		isRoot = zig(node)
+	}
 }
