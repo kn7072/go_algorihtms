@@ -2,6 +2,11 @@ package main
 
 //import "fmt"
 
+const (
+	root = "root"
+	left = "left"
+	right = "right"
+)
 
 type Ordered interface {
 	~int | ~int8 | ~int16 | ~int32 | ~int64 |
@@ -59,25 +64,21 @@ func find[T Ordered](root **Node[T], value T) *Node[T] {
 }
 
 func posiotionNode[T Ordered](node *Node[T]) string {
-	if node.Parent == nil {
-		return "root"
-	} else if (node.Parent.Left != nil && node.Parent.Left == node) {
-		return "left"
-	} else {
-		return "right"
+	switch {
+	case node.Parent == nil:
+		return root
+	case (node.Parent.Left != nil && node.Parent.Left == node):
+		return left
+	default:
+		return right
 	}
 }
 
-
-
 func zig[T Ordered](node *Node[T]) (isRoot bool){
-	
-
-	// parentPtr := node.Parent
 	parentValue := *node.Parent
 
 	switch posiotionNode(node){
-	case "left":
+	case left:
 		if node.Right == nil {
 			parentValue.Left = node.Right
 		} else {
@@ -92,31 +93,22 @@ func zig[T Ordered](node *Node[T]) (isRoot bool){
 			parentValue.Right.Parent = &parentValue
 		}
 		switch posiotionNode(node.Parent){
-		case "left":
+		case left:
 			// parent is left child of grandparent
 			node.Parent.Parent.Left = node
 			node.Parent = node.Parent.Parent
-		case "right":
+		case right:
 			// parent is right child of grandparent
 			node.Parent.Parent.Right = node
 			node.Parent = node.Parent.Parent
-		case "root":
+		case root:
 			// parent is root
 			*(node.Parent) = *node
 			node.Parent.Parent = nil
 			isRoot = true
 		}
 
-	case "right":
-		// if node.Left == nil {
-		// 	parentValue.Right = node.Left
-		// } else {
-		// 	parentValue.Right = node.Left
-		// 	parentValue.Right.Parent = &parentValue
-		// 	node.Left = &parentValue
-		// 	parentValue.Parent = node
-		// }
-
+	case right:
 		if node.Left == nil {
 			parentValue.Right = node.Left
 		} else {
@@ -131,21 +123,21 @@ func zig[T Ordered](node *Node[T]) (isRoot bool){
 			parentValue.Left.Parent = &parentValue
 		}
 		switch posiotionNode(node.Parent){
-		case "left":
+		case left:
 			// parent is left child of grandparent
 			node.Parent.Parent.Left = node
 			node.Parent = node.Parent.Parent
-		case "right":
+		case right:
 			// parent is right child of grandparent
 			node.Parent.Parent.Right = node
 			node.Parent = node.Parent.Parent
-		case "root":
+		case root:
 			// parent is root
 			*(node.Parent) = *node
 			node.Parent.Parent = nil
 			isRoot = true
 		}
-	case "root":
+	case root:
 		return true
 	}
 
