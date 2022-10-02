@@ -79,10 +79,8 @@ func zig[T Ordered](node *Node[T]) (isRoot bool){
 
 	switch posiotionNode(node){
 	case left:
-		if node.Right == nil {
-			parentValue.Left = node.Right
-		} else {
-			parentValue.Left = node.Right
+		parentValue.Left = node.Right
+		if node.Right != nil {
 			parentValue.Left.Parent = &parentValue
 		}
 
@@ -109,10 +107,8 @@ func zig[T Ordered](node *Node[T]) (isRoot bool){
 		}
 
 	case right:
-		if node.Left == nil {
-			parentValue.Right = node.Left
-		} else {
-			parentValue.Right = node.Left
+		parentValue.Right = node.Left
+		if node.Left != nil {
 			parentValue.Right.Parent = &parentValue
 		}
 
