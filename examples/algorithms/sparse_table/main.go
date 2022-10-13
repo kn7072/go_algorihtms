@@ -25,11 +25,23 @@ func setTableMin(sparseTable [][]int) {
 }
 
 func request(sparseTable [][]int, left, right int) int {
-	// нужно добавить проверки границ
-	level := int(math.Floor(math.Log2(float64(right - left))))
-
-	return int(math.Max(float64(sparseTable[level][left]), 
-		float64(sparseTable[level][right-int(math.Pow(2, float64(level)))])))
+	if left >= 0 && right >= 0 {
+		if left == right {
+			return sparseTable[left][0]
+		} else {
+			// todo : предподсчитать логарифмы для всех чисел < длины массива
+			level := int(math.Floor(math.Log2(float64(right - left))))
+			if level == 0 {
+				return int(math.Max(float64(sparseTable[level][left]),
+					float64(sparseTable[level][right])))
+			} else {
+				return int(math.Max(float64(sparseTable[level][left]),
+					float64(sparseTable[level][right-int(math.Pow(2, float64(level)))])))
+			}
+		}
+	} else {
+		panic(fmt.Sprintf("Одна из границ отрицательная left %v, right %v", left, right))
+	}
 }
 
 func createEmptyTable(array []int) [][]int {
@@ -63,4 +75,10 @@ func main() {
 
 	req = request(sparseTable, 0, 1)
 	fmt.Println(req)
+
+	req = request(sparseTable, 0, 0)
+	fmt.Println(req)
+
+	// req = request(sparseTable, -1, 0)
+	// fmt.Println(req)
 }
