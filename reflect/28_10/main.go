@@ -23,7 +23,8 @@ func describeMap(m interface{}) {
 	mapType := reflect.TypeOf(m)
 
 	if mapType.Kind() == reflect.Map {
-		Printfln("Key type: %v, Val type: %v", mapType.Key(), mapType.Elem())
+		Printfln("Key type: %v, Val type: %v",
+			mapType.Key(), mapType.Elem())
 	} else {
 		Printfln("Not a map")
 	}
