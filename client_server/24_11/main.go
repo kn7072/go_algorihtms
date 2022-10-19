@@ -64,4 +64,7 @@ func main() {
 	if err != nil {
 		Printfln("Error: %v", err.Error())
 	}
+	// https://localhost:5500/templates/products.html
+	// https://localhost:5500/templates/edit.html?index=2
+	// https://localhost:5500/files/upload.html
 }
