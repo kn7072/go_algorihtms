@@ -67,4 +67,5 @@ func main() {
 	// https://localhost:5500/templates/products.html
 	// https://localhost:5500/templates/edit.html?index=2
 	// https://localhost:5500/files/upload.html
+	// https://localhost:5500/cookies
 }
