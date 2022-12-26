@@ -109,7 +109,8 @@ func (t *Tree[T]) update(nodeIndex, leftNode, rightNode int, position int, newVa
 }
 
 func main() {
-	arr := []*Node[int]{{1},
+	arr := []*Node[int]{
+		{1},
 		{3},
 		{5},
 		{4},
@@ -120,7 +121,7 @@ func main() {
 		{-200},
 	}
 	tree := NewTree(arr)
-	fmt.Println(tree)
+	// fmt.Println(tree)
 	res := tree.get(0, 0, len(arr)-1, 2, 5)
 	fmt.Println(res)
 

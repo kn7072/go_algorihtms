@@ -34,6 +34,9 @@ func HTTPSRedirect(writer http.ResponseWriter, request *http.Request) {
 
 func main() {
 	http.Handle("/message", StringHandler{"Hello, World"})
+	
+	http.Handle("/sentence", StringHandler{"Hello111, World1111"})
+
 	http.Handle("/favicon.ico", http.NotFoundHandler())
 	http.Handle("/", http.RedirectHandler("/message",
 		http.StatusTemporaryRedirect))

@@ -76,7 +76,7 @@ func Printfln(template string, values ...interface{}) {
 func main() {
 	Printfln("Starting HTTP Server")
 	go http.ListenAndServe(":5000", nil)
-	time.Sleep(3 * time.Second)
+	time.Sleep(2 * time.Second)
 
 	response, err := http.Get("http://localhost:5000/html")
 	if (err == nil && response.StatusCode == http.StatusOK) {
