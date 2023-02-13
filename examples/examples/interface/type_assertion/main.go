@@ -34,6 +34,22 @@ func (m *MyStuct) NewMethodChild() int {
 	return m.Value
 }
 
+type I1 interface {
+	M()
+}
+
+type I2 interface {
+	I1
+	N()
+}
+
+type T struct {
+	name string
+}
+
+func (T) M() {}
+func (T) N() {}
+
 func main() {
 	var interfaceParent Parent
 	//var interfaceChild Child
@@ -44,6 +60,9 @@ func main() {
 		fmt.Printf("%T, %v\n", v, v)
 		v.MethodChild()
 		//fmt.Println(v.Value)
+		if vDinamiv, ok := v.(*MyStuct); ok {
+			fmt.Printf("%T, %v, %v", vDinamiv, vDinamiv, vDinamiv.Value)
+		}
 	}
 
 	if v, ok := interfaceParent.(*MyStuct); ok {
@@ -53,4 +72,11 @@ func main() {
 	}
 
 	fmt.Println(interfaceParent) // , interfaceChild
+
+	var v1 I1 = T{"foo"}
+	var v2 I2
+	v2, ok := v1.(I2)
+	fmt.Printf("%T %v %v\n", v2, v2, ok) // main.T {foo} true
+	// fmt.Printf("v2.name", v2.name)
+	v2.N()
 }
