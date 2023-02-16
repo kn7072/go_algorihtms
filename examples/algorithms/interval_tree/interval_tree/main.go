@@ -1,10 +1,12 @@
 package main
 
+//https://iq.opengenus.org/interval-tree/
+
 import (
 	"fmt"
 )
 
-func main(){
+func main() {
 	root := NewTree()
 	searchV := NewValue(15, 16)
 	searchNotExist := NewValue(50, 60)
@@ -21,7 +23,7 @@ func main(){
 
 	res := Get(root, searchV)
 	fmt.Println(res)
-	
+
 	res2 := Get(root, searchNotExist)
 	fmt.Println(res2)
 
