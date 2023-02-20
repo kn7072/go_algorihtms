@@ -50,4 +50,8 @@ func main() {
 	sliceEmbeded := []Embeded{{0, 0}, {1, 1}}
 	embededSlise := TestEmbededSlise{sliceEmbeded}
 	fmt.Printf("%#v", embededSlise)
+
+	sliceEmbeded2 := EmbededSlise{{0, 0}, {1, 1}}
+	embededSlise2 := TestEmbededSlise{sliceEmbeded2}
+	fmt.Printf("%#v", embededSlise2)
 }
