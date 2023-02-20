@@ -8,6 +8,8 @@ type Embeded struct {
 	A, B int
 }
 
+type EmbededSlise []Embeded
+
 func (t Embeded) MethodTestEmbeded() {
 	fmt.Println("MethodTestEmbeded", t.A, t.B)
 }
@@ -30,6 +32,10 @@ type TestEmbedPtrReceiver struct {
 	*Embeded // встроенное поле - указатель
 }
 
+type TestEmbededSlise struct {
+	EmbededSlise
+}
+
 func main() {
 	embededValueReceiver := TestEmbedValueReceiver{Embeded: Embeded{A: 1, B: 2}}
 	embededValueReceiver.MethodTestEmbeded()
@@ -40,4 +46,8 @@ func main() {
 	embededPtrReceiver.MethodTestEmbeded()
 	embededPtrReceiver.MethodTestEmbededPtr(6)
 	fmt.Println(embededPtrReceiver.A)
+
+	sliceEmbeded := []Embeded{{0, 0}, {1, 1}}
+	embededSlise := TestEmbededSlise{sliceEmbeded}
+	fmt.Printf("%#v", embededSlise)
 }
